@@ -35,6 +35,19 @@ class ProductsPage {
           });
       });
   }
+
+  hoverAndAddToCart(index) {
+    cy.get('.product-image-wrapper').eq(index).trigger('mouseover');
+    cy.get('.product-image-wrapper').eq(index).contains('Add to cart').click({ force: true });
+  }
+
+  clickContinueShopping() {
+    cy.contains('Continue Shopping').click();
+  }
+
+  clickViewCart() {
+    cy.contains('View Cart').click();
+  }
 }
 
 export default ProductsPage;
