@@ -26,6 +26,14 @@ class HomePage {
   clickContinue() {
     cy.contains("Continue").click();
   }
+
+  clickContactUs() {
+    cy.contains("Contact us").click();
+  }
+
+  clickTestCases() {
+    cy.contains("Test Cases").click();
+  }
 }
 
 export default HomePage;

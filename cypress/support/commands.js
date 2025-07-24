@@ -23,12 +23,28 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import 'cypress-file-upload';
+
 Cypress.Commands.add("createTestUser", (user) => {
   cy.visit("/");
   cy.contains("Signup / Login").click();
   cy.get('[data-qa="signup-name"]').type(user.name);
   cy.get('[data-qa="signup-email"]').type(user.email);
   cy.get('[data-qa="signup-button"]').click();
+
+  cy.document().then((doc) => {
+    // Check if "Email Address already exist!" alert is present
+    if (doc.body.innerText.includes("Email Address already exist!")) {
+      cy.loginAndDeleteUser(user);
+      // Try registration again after deletion
+      cy.visit("/");
+      cy.contains("Signup / Login").click();
+      cy.get('[data-qa="signup-name"]').type(user.name);
+      cy.get('[data-qa="signup-email"]').type(user.email);
+      cy.get('[data-qa="signup-button"]').click();
+    }
+  });
+
   cy.contains("Enter Account Information").should("be.visible");
   cy.get("#id_gender1").check();
   cy.get('[data-qa="password"]').type(user.password);
@@ -50,5 +66,17 @@ Cypress.Commands.add("createTestUser", (user) => {
   cy.get('[data-qa="create-account"]').click();
   cy.contains("Account Created!").should("be.visible");
   cy.contains("Continue").click();
-  cy.contains("Logout").click(); // <-- Add this line to log out after registration
+  cy.contains("Logout").click();
+});
+
+Cypress.Commands.add("loginAndDeleteUser", (user) => {
+  cy.visit("https://www.automationexercise.com");
+  cy.contains("Signup / Login").click();
+  cy.get('input[data-qa="login-email"]').type(user.email);
+  cy.get('input[data-qa="login-password"]').type(user.password);
+  cy.get('[data-qa="login-button"]').click();
+  cy.contains(`Logged in as ${user.name}`).should("be.visible");
+  cy.contains("Delete Account").click();
+  cy.get('[data-qa="account-deleted"]').should("be.visible").and("contain.text", "Account Deleted!");
+  cy.get('[data-qa="continue-button"]').click();
 });

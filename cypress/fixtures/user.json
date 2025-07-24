@@ -1,0 +1,15 @@
+{
+  "name": "TestUser",
+  "email": "testuser@example211002377.com",
+  "password": "Password123!",
+  "firstName": "Test",
+  "lastName": "User",
+  "company": "TestCompany",
+  "address": "123 Test St",
+  "address2": "Suite 100",
+  "country": "Canada",
+  "state": "Ontario",
+  "city": "Toronto",
+  "zipcode": "A1A1A1",
+  "mobile": "1234567890"
+}

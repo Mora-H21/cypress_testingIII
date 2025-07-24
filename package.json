@@ -13,7 +13,8 @@
     "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
     "cucumber": "^6.0.7",
-    "cypress": "^14.5.2"
+    "cypress": "^14.5.2",
+    "cypress-file-upload": "^5.0.8"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": "cypress/e2e/step_definitions/*"
