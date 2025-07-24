@@ -38,6 +38,10 @@ class HomePage {
   clickProducts() {
     cy.contains("Products").click();
   }
+
+  clickCart() {
+    cy.contains("Cart").click();
+  }
 }
 
 export default HomePage;
