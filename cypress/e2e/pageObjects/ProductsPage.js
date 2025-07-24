@@ -9,7 +9,7 @@ class ProductsPage {
   }
 
   clickViewFirstProduct() {
-    cy.get('.features_items .product-image-wrapper').first().contains("View Product").click();
+    cy.get('.product-image-wrapper').first().contains("View Product").click();
   }
 
   searchProduct(productName) {

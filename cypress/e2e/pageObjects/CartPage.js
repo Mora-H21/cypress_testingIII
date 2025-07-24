@@ -11,6 +11,10 @@ class CartPage {
     });
     // Optionally, add more detailed checks for price/quantity/total math here
   }
+
+  verifyProductQuantity(expectedQuantity) {
+    cy.get('.cart_quantity button').should('have.text', expectedQuantity.toString());
+  }
 }
 
 export default CartPage;

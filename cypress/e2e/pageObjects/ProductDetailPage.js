@@ -14,6 +14,18 @@ class ProductDetailPage {
       cy.contains('Brand').should('be.visible');
     });
   }
+
+  setQuantity(quantity) {
+    cy.get('input[name="quantity"]').clear().type(quantity);
+  }
+
+  clickAddToCart() {
+    cy.contains("Add to cart").click();
+  }
+
+  clickViewCart() {
+    cy.contains("View Cart").click();
+  }
 }
 
 export default ProductDetailPage;
