@@ -66,6 +66,20 @@ class ProductsPage {
     cy.get('.features_items').should('be.visible');
     cy.contains(expectedText).should('be.visible');
   }
+
+  verifyBrandsSidebarVisible() {
+    cy.get('.brands_products').should('be.visible');
+    cy.contains('Brands').should('be.visible');
+  }
+
+  clickBrand(brandName) {
+    cy.get('.brands_products').find('a').contains(brandName).click();
+  }
+
+  verifyBrandPageVisible(brandName) {
+    cy.get('.features_items').should('be.visible');
+    cy.contains(`${brandName} Products`).should('be.visible');
+  }
 }
 
 export default ProductsPage;
