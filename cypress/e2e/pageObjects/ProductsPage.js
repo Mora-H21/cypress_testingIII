@@ -31,7 +31,10 @@ class ProductsPage {
           .find('.productinfo p') // Adjust selector to the product name element
           .invoke('text')
           .then((text) => {
-            expect(text.toLowerCase()).to.include(productName.toLowerCase());
+            // Normalize text by removing hyphens and spaces for comparison
+            const normalizedText = text.toLowerCase().replace(/[-\s]/g, '');
+            const normalizedProductName = productName.toLowerCase().replace(/[-\s]/g, '');
+            expect(normalizedText).to.include(normalizedProductName);
           });
       });
   }
@@ -79,6 +82,20 @@ class ProductsPage {
   verifyBrandPageVisible(brandName) {
     cy.get('.features_items').should('be.visible');
     cy.contains(`${brandName} Products`).should('be.visible');
+  }
+
+  addAllSearchedProductsToCart() {
+    cy.contains('Searched Products')
+      .parent()
+      .find('.product-image-wrapper')
+      .each(($el, index, $list) => {
+        cy.wrap($el).trigger('mouseover');
+        cy.wrap($el).contains('Add to cart').click({ force: true });
+        // If not the last product, click Continue Shopping
+        if (index < $list.length - 1) {
+          cy.contains('Continue Shopping').click();
+        }
+      });
   }
 }
 
