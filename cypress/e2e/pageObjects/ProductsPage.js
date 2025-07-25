@@ -48,6 +48,24 @@ class ProductsPage {
   clickViewCart() {
     cy.contains('View Cart').click();
   }
+
+  verifyCategoriesSidebarVisible() {
+    cy.get('.left-sidebar').should('be.visible');
+    cy.contains('Category').should('be.visible');
+  }
+
+  clickMainCategory(categoryName) {
+    cy.get('.panel-group.category-products').contains(categoryName).click();
+  }
+
+  clickSubCategory(mainCategory, subCategory) {
+    cy.get(`#${mainCategory}`).find('a').contains(subCategory).click();
+  }
+
+  verifyCategoryPageVisible(expectedText) {
+    cy.get('.features_items').should('be.visible');
+    cy.contains(expectedText).should('be.visible');
+  }
 }
 
 export default ProductsPage;
