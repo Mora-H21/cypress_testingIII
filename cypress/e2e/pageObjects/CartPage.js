@@ -15,6 +15,18 @@ class CartPage {
   verifyProductQuantity(expectedQuantity) {
     cy.get('.cart_quantity button').should('have.text', expectedQuantity.toString());
   }
+
+  verifyCartPageVisible() {
+    cy.contains("Shopping Cart").should("be.visible");
+  }
+
+  clickProceedToCheckout() {
+    cy.contains("Proceed To Checkout").click();
+  }
+
+  clickRegisterLogin() {
+    cy.get('a').contains("Register / Login").click();
+  }
 }
 
 export default CartPage;
