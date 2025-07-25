@@ -27,6 +27,14 @@ class CartPage {
   clickRegisterLogin() {
     cy.get('a').contains("Register / Login").click();
   }
+
+  removeFirstProduct() {
+    cy.get('.cart_info .cart_product').first().parent().find('.cart_quantity_delete').click();
+  }
+
+  verifyProductNotInCart(productName) {
+    cy.get('.cart_description').should('not.contain', productName);
+  }
 }
 
 export default CartPage;
